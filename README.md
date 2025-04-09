@@ -1,7 +1,4 @@
-# Memory Game - PyQt5 Implementation
-
-![Memory Game Screenshot](screenshot.png)
-
+# Memory Game 
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
