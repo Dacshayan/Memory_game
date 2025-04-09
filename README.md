@@ -9,10 +9,10 @@
 - [Planned Features](#Planned_Features)
 
 
-## Description
+## 📌 Description
 This is a classic Memory Card Game implemented using Python and PyQt5. The game challenges players to find matching pairs of cards by remembering their positions. It supports both single-player and multiplayer modes (up to 4 players).
 
-## Features
+## ✨ Features
 - 🎮 Two game modes: Solo and Multiplayer (2-4 players)
 - 🔢 Configurable number of card pairs (2-18 pairs)
 - 👥 Player name customization
