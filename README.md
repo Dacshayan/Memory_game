@@ -35,6 +35,14 @@ pip install PyQt5
 ```sh
 python Main.py
 ```
+## 📂 File Structure  
+```sh
+📂 HMI MEMORY PROJECT  
+ ├── 📄 Main.py      # Main program file  
+ ├── 📂 images     # File with all the images  
+ ├── 📄 README.md    # Project documentation  
+```
+
 ## How to Play
 # Basic Game Flow
 1. Launch the game by running: python memory_game.py
