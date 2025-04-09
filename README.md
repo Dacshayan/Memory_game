@@ -9,7 +9,7 @@
 - [Installation](#installation)
 - [How to Play](#how-to-play)
 - [Game Rules](#game-rules)
-- [Planned Features](#future-improvements)
+- [Planned Features](#Planned_Features)
 
 
 ## Description
