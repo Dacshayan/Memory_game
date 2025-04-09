@@ -9,6 +9,7 @@ from PyQt5.QtGui import (QColor, QPalette, QFont, QIcon, QPainter, QPixmap)
 from PyQt5.QtCore import (QCoreApplication, Qt, QTimer, QSize, QPropertyAnimation, 
                          QEasingCurve)
 
+
 class Card(QPushButton):
     def __init__(self, value, row, col):
         super().__init__()
@@ -28,6 +29,9 @@ class Card(QPushButton):
             self.setIcon(QIcon(f'images/card{self.value}.png'))
         self.is_flipped = not self.is_flipped
 
+    def matched(self):
+        self.matched = True
+        self.setStyleSheet("background-color: lightgreen")
 
 class Player:
     def __init__(self, name):
@@ -293,8 +297,8 @@ class MemoryGame(QMainWindow):
         card1, card2 = self.flipped_cards
         
         if card1.value == card2.value:
-            card1.is_matched = True
-            card2.is_matched = True
+            card1.matched()
+            card2.matched()
             self.flipped_cards = []
             
             current_player = self.Players[self.current_player_index]
