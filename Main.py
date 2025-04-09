@@ -23,6 +23,8 @@ class Card(QPushButton):
         self.setText("")
 
     def flip(self):
+        """Toggle the card's state between flipped and unflipped."""
+        
         if self.is_flipped:
             self.setIcon(QIcon('images/card_back.png'))
         else:
@@ -30,10 +32,12 @@ class Card(QPushButton):
         self.is_flipped = not self.is_flipped
 
     def matched(self):
+        """Mark the card as successfully matched and change its appearance."""
         self.matched = True
         self.setStyleSheet("background-color: lightgreen")
 
 class Player:
+    """Represents a player with their name and score."""
     def __init__(self, name):
         self.name = name
         self.matched_pairs = 0
@@ -60,6 +64,9 @@ class MemoryGame(QMainWindow):
         self.start_ui()
 
     def start_ui(self):
+        """
+        Create the initial start screen with game mode selection buttons.
+        """
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         layout = QVBoxLayout()
@@ -83,6 +90,9 @@ class MemoryGame(QMainWindow):
         layout.addSpacing(20)
 
     def setup_solo_game(self):
+        """
+        Set up a single-player game by getting player name and card count.
+        """
         name, ok = QInputDialog.getText(self, "Player Name", "Enter your name:")
         if ok and name:
             num_card, ok2 = QInputDialog.getInt(self, "Number of Pairs", 
@@ -96,6 +106,9 @@ class MemoryGame(QMainWindow):
                 self.init_game()
 
     def setup_multiplayer_game(self):
+        """
+        Set up a multiplayer game by getting player names and card count.
+        """
         num_players, ok = QInputDialog.getInt(self, "Number of Players", 
                                             "Enter number of players (2-4):", 
                                             min=2, max=4)
@@ -190,7 +203,10 @@ class MemoryGame(QMainWindow):
             self.grid_layout.addWidget(card, row, col)
 
     def give_reveal(self):
-        """Reveals two matching cards briefly when reveal button is clicked"""
+        """
+        Provide a hint by briefly revealing a matching pair of cards.
+        Only available in single-player mode with remaining reveals.
+        """       
         if not self.game_started or self.reveals_remaining <= 0:
             return
             
@@ -249,7 +265,9 @@ class MemoryGame(QMainWindow):
  
 
     def animate_reveal_reveal(self, card):
-        """Animation to show a card for the reveal"""
+        """
+        Animate the revealing of a card for the hint system.
+        """
         if card.is_flipped:
             return
             
@@ -294,6 +312,7 @@ class MemoryGame(QMainWindow):
         self.score_label.setText(f"Pairs found: {self.Players[self.current_player_index].matched_pairs}")
 
     def check_match(self):
+        """Check if the two flipped cards match and update game state accordingly."""
         card1, card2 = self.flipped_cards
         
         if card1.value == card2.value:
@@ -314,15 +333,18 @@ class MemoryGame(QMainWindow):
             QTimer.singleShot(1000, self.flip_cards_back)
 
     def update_score(self):
+        """Update the score display for the current player."""
         self.score_label.setText(f"Pairs found: {self.Players[self.current_player_index].matched_pairs}")
 
     def flip_cards_back(self):
+        """Flip unmatched cards back face-down and advance turn."""
         for card in self.flipped_cards:
             card.flip()
         self.flipped_cards = []
         self.next_player()
 
     def game_over(self):
+        """Handle game end conditions and display winner information."""
         self.game_started = False
         max_pairs = max(player.matched_pairs for player in self.Players)
         winners = [player for player in self.Players if player.matched_pairs == max_pairs]
